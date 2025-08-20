@@ -11,40 +11,12 @@ In most cases you won't need to set up your own camera driver, because other app
 (An non working OTG cable doesn't show the right interfaces and endpoints of you camera: --> When you click on 'List Up The Camera' Button)
 
 
-License
--------
-
-    Copyright 2019 Peter Stoiber
-
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
-
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
-
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Please contact the author if you need another license.
-    This Repository is provided "as is", without warranties of any kind.
-
-
-
-Since Android 9 Usb Cameras on Android needs several other permissions and at least the SdkVersion 30 to run sucessfully
---> https://issuetracker.google.com/issues/145082934
-
-
 
 Explaination:
 Before you start with entering the Camera values, your Android device have to detect the Camera:
 So you click the Button <Set Up The Usb Device> and then the Button <Find the Camera>. The app will ask you for granting the permissions.
 
-![alt text](https://github.com/Peter-St/Android-UVC-Camera/blob/master/app/src/main/res/drawable/findcam.png?raw=true)
+![alt text](https://github.com/work-dump/Android-UVC-Camera/blob/master/app/src/main/res/drawable/findcam.png?raw=true)
 
 
 In the Picture above a camera was found and the Permissions to the Camera are granted.
@@ -52,7 +24,7 @@ If no Camera is detected, you can nott use this app. (except of the WebRTC funct
 Next you have read out the camera Interfaces, to see if your camera is UVC complient.
 So you click the Button: <List Up The Camera>:
 
-![alt text](https://github.com/Peter-St/Android-UVC-Camera/blob/master/app/src/main/res/drawable/listdev.png?raw=true)
+![alt text](https://github.com/work-dump/Android-UVC-Camera/blob/master/app/src/main/res/drawable/listdev.png?raw=true)
 
 Here you can see a sucessful return of an UVC compliant camera. The first Interface is always the ControlInterface and the second is always the Stream Interface.
 This Controlinterface (1st) has only 1 Endpoint.
@@ -78,13 +50,13 @@ You can save your Entries now:
 Click on <Yes, Save> to save this values (you do not need to run the method again, if you have finished the setup and found some working values ...
 If you click on <ok> in the next screen --> an automatic name will be taken from the camera to save the file. You can also enter a unique name or enter the value, which is displayed on the bottom, to choose an existing file.
 
-![alt text](https://github.com/Peter-St/Android-UVC-Camera/blob/master/app/src/main/res/drawable/setup_complete.png?raw=true)
+![alt text](https://github.com/work-dump/Android-UVC-Camera/blob/master/app/src/main/res/drawable/setup_complete.png?raw=true)
 
 The picture shows the output of the sucessful setup:
 Now you want to know, if your Camera works with your selected Values. So you start the comunication with your camera by clicking on the Button <-Controltransfer-Testrun-> and then you select the first entry <Video Probe-Commit Controls>.
 The app then starts to initialize the camera with your selected values!
 
-![alt text](https://github.com/Peter-St/Android-UVC-Camera/blob/master/app/src/main/res/drawable/controltransfer.png?raw=true)
+![alt text](https://github.com/work-dump/Android-UVC-Camera/blob/master/app/src/main/res/drawable/controltransfer.png?raw=true)
 
 If you output is the same like on the Picture above, you have sucessfuly initialized your camera with your selected values.
 If you do not get a sucessful output of this Button (Video Probe-Commit Control) you can not use the app with your phone / camera.
@@ -93,7 +65,7 @@ If you were sucessful, then you can proceed with reading out the camera frames (
 To receive some data from your camera, your press the Button <-Controltransfer-Testrun-> again and then on <Testrun> and then on <One Frame>.
 You then should receive the first frame data from your camera.
 
-![alt text](https://github.com/Peter-St/Android-UVC-Camera/blob/master/app/src/main/res/drawable/one_frame.png?raw=true)
+![alt text](https://github.com/work-dump/Android-UVC-Camera/blob/master/app/src/main/res/drawable/one_frame.png?raw=true)
 
 The first data which was received on the picture above, were 39950 byte in this case.
 This means that the camera communicats with the android device and trys to submit the frame data. But the data received above is much to less for a frame Image of a sample size of 640 x 480. So tbe Values "ActiveUrbs" and "PacketsPerRequest" should be raised to get a better output: in my case to 16 Packets and 16 Urbs.
@@ -102,7 +74,7 @@ To raise the vales for (packetsPerRequest and activeUrbs) you can re-run the <ma
 There you should only change the values for these two values (packetsPerRequest and activeUrbs).
 If you re-run the manual method, you can keep your values by clicking on done, or type in new values to change em.
 
-![alt text](https://github.com/Peter-St/Android-UVC-Camera/blob/master/app/src/main/res/drawable/one_frame_2.png?raw=true)
+![alt text](https://github.com/work-dump/Android-UVC-Camera/blob/master/app/src/main/res/drawable/one_frame_2.png?raw=true)
 
 Here you see, that the frame now gots larger --> 614400 --> this is exact the size of imageWidth x ImageHight x 2 --> 640 x 480 x 2.
 So in the shown case, the correct setting was found and now the camera setup is finished!
